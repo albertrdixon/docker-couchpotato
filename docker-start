@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eo pipefail
+function run_cmd { exec $*; }
+
+function main {
+  local cmd="$@"
+  [ -z "$cmd" ] && \
+  cmd="/usr/bin/supervisord -c /etc/supervisor/supervisord.conf"
+
+  cd /couchpotatoserver
+  git pull
+  run_cmd "$cmd"
+}
+
+ulimit -n 32768
+main "$@"
+exit 0
