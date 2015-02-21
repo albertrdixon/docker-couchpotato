@@ -6,23 +6,28 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends --force-yes \
     python git-core supervisor ca-certificates \
-    unrar-free unar unzip locales
+    unar unzip locales curl
+
 RUN dpkg-reconfigure locales && \
     locale-gen C.UTF-8 && \
     /usr/sbin/update-locale LANG=C.UTF-8
 
-RUN git clone --branch master --single-branch \
-    git://github.com/RuudBurger/CouchPotatoServer.git /couchpotatoserver
+RUN curl -#kL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-v0.0.2.tar.gz |\
+    tar xvz -C /usr/local/bin
 
-ADD docker-start /usr/local/bin/
-ADD supervisord/* /etc/supervisor/conf.d/
+RUN git clone --branch master --single-branch \
+    git://github.com/RuudBurger/CouchPotatoServer.git /couchpotato
+
+ADD docker-* /usr/local/bin/
+ADD configs /templates
 RUN mkdir /data && \
     chmod a+rx /usr/local/bin/*
 
-WORKDIR /couchpotatoserver
-ENTRYPOINT ["docker-start"]
+WORKDIR /couchpotato
+ENTRYPOINT ["docker-entry"]
 EXPOSE 5050
 
-ENV CP_DATA_DIR   /data
-ENV CP_CONFIG     $CP_DATA_DIR/settings.conf
-ENV CP_PID_FILE   $CP_DATA_DIR/couchpotato.pid
+ENV SUPERVISOR_LOG_LEVEL INFO
+ENV CP_DATA_DIR          /data
+ENV CP_CONFIG            /data/settings.conf
+ENV CP_PID_FILE          /data/couchpotato.pid
