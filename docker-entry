@@ -7,6 +7,7 @@ echo "**** Starting Couchpotato (https://couchpota.to/) container. Enjoy! ****"
 
 dockerize \
   -template /templates/supervisord.conf.tpl:/etc/supervisor/supervisord.conf \
+  -template /templates/dnsmasq.conf.tpl:/etc/dnsmasq.conf \
   echo "==> Writing /etc/supervisor/supervisord.conf from /templates/supervisord.conf.tpl"
 
 exec $*

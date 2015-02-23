@@ -16,3 +16,10 @@ stdout_logfile          = /dev/stdout
 stdout_logfile_maxbytes = 0
 stderr_logfile          = /dev/stderr
 stderr_logfile_maxbytes = 0
+
+[program:dnsmasq]
+command                 = dnsmasq -kd
+stdout_logfile          = /dev/stdout
+stdout_logfile_maxbytes = 0
+stderr_logfile          = /dev/stderr
+stderr_logfile_maxbytes = 0
