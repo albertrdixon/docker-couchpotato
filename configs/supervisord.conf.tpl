@@ -3,6 +3,13 @@ nodaemon  = true
 user      = root
 loglevel  = {{ default .Env.SUPERVISOR_LOG_LEVEL "INFO" }}
 
+[unix_http_server]
+file=/var/run/supervisor.sock
+chmod=0700
+
+[supervisorctl]
+serverurl=unix:///var/run/supervisor.sock
+
 [program:couchpotato]
 command = python CouchPotato.py --data_dir {{ default .Env.CP_DATA_DIR "/data" }} --config_file {{ default .Env.CP_CONFIG "/data/settings.conf" }} --console_log
 directory               = /couchpotato
