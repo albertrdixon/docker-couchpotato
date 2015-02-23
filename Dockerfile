@@ -27,6 +27,7 @@ WORKDIR /couchpotato
 ENTRYPOINT ["docker-entry"]
 EXPOSE 5050
 
+ENV OPEN_FILE_LIMIT      32768
 ENV SUPERVISOR_LOG_LEVEL INFO
 ENV CP_DATA_DIR          /data
 ENV CP_CONFIG            /data/settings.conf
