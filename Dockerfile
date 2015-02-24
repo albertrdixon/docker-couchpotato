@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends --force-yes \
-    python git-core supervisor ca-certificates \
+    python git-core ca-certificates \
     unar unzip locales curl dnsmasq
 
 RUN dpkg-reconfigure locales && \
@@ -14,6 +14,9 @@ RUN dpkg-reconfigure locales && \
 
 RUN curl -#kL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-v0.0.2.tar.gz |\
     tar xvz -C /usr/local/bin
+
+RUN curl -#kL -o /usr/local/bin/forego \
+    https://godist.herokuapp.com/projects/ddollar/forego/releases/current/linux-amd64/forego
 
 RUN git clone --branch master --single-branch \
     git://github.com/RuudBurger/CouchPotatoServer.git /couchpotato

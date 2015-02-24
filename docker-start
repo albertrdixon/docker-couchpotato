@@ -3,6 +3,6 @@ set -eo pipefail
 
 cd /couchpotato
 git pull
-exec "/usr/bin/supervisord" "-c" "/etc/supervisor/supervisord.conf"
+exec "forego" "start" "-f" "/Procfile"
 
 exit 0
