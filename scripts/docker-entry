@@ -6,9 +6,9 @@ echo "**** Starting Couchpotato (https://couchpota.to/) container. Enjoy! ****"
   ulimit -n $OPEN_FILE_LIMIT
 
 dockerize \
-  -template /templates/Procfile.tpl:/Procfile \
+  -template /templates/supervisord.conf.tpl:/etc/supervisord.conf \
   -template /templates/dnsmasq.conf.tpl:/etc/dnsmasq.conf \
-  echo "==> Writing configs"
+  echo "==> Writing configs from templates"
 
 exec $*
 exit 0
