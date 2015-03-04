@@ -10,6 +10,5 @@ dockerize \
   -template /templates/dnsmasq.conf.tpl:/etc/dnsmasq.conf \
   echo "==> Writing configs from templates"
 
-dnsmasq --all-servers --local-service
 exec $*
 exit 0
