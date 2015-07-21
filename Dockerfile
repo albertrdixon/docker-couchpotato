@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
     curl git python locales supervisor \
-    ca-certificates dnsmasq 
+    ca-certificates 
 
 RUN dpkg-reconfigure locales && \
     locale-gen C.UTF-8 && \
@@ -17,7 +17,7 @@ RUN curl -#kL https://github.com/albertrdixon/tmplnator/releases/download/v2.1.0
 RUN curl -#kL https://github.com/albertrdixon/escarole/releases/download/v0.1.0/escarole-linux.tar.gz |\
     tar xvz -C /usr/local/bin
 
-RUN git clone -v git://github.com/RuudBurger/CouchPotatoServer.git /couchpotato
+RUN git clone -v --depth 1 git://github.com/RuudBurger/CouchPotatoServer.git /couchpotato
 
 ADD bashrc /root/.bashrc
 ADD configs /templates
