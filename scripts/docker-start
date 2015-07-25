@@ -6,5 +6,5 @@ cd $COUCHPOTATO_HOME
 git checkout $COUCHPOTATO_CHANNEL
 git pull --verbose
 
-exec -a "supervisord" "supervisord" "-c" "/etc/supervisor/supervisord.conf"
+exec -a "supervisord" "supervisord" "-c" "/etc/supervisord.conf"
 exit 0

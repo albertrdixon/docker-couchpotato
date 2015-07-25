@@ -1,5 +1,5 @@
 {{ path "/" }}---
   name: couchpotato
-  directory: {{ default .Env.COUCHPOTATO_HOME "/couchpotato" }}
+  directory: {{ def .Env.COUCHPOTATO_HOME "/couchpotato" }}
   command: supervisorctl restart couchpotato
   git: true

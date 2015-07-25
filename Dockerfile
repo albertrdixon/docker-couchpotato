@@ -1,21 +1,21 @@
-FROM debian:jessie
+FROM alpine:3.2
 MAINTAINER Albert Dixon <albert.dixon@schange.com>
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
-    curl git python locales supervisor \
-    ca-certificates unrar-free
+RUN echo "http://dl-4.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+    && echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk update
+RUN apk add bash python ca-certificates \
+    git unrar py-openssl supervisor
 
-RUN dpkg-reconfigure locales && \
-    locale-gen C.UTF-8 && \
-    /usr/sbin/update-locale LANG=C.UTF-8
+ADD https://github.com/albertrdixon/tmplnator/releases/download/v2.2.0/t2-linux.tgz /t2.tgz
+RUN tar xvzf /t2.tgz -C /usr/local \
+    && ln -s /usr/local/bin/escarole-linux /usr/local/bin/escarole \
+    && rm -f /t2.tgz
 
-RUN curl -#kL https://github.com/albertrdixon/tmplnator/releases/download/v2.1.0/tnator-linux-amd64.tar.gz |\
-    tar xvz -C /usr/local/bin
-
-RUN curl -#kL https://github.com/albertrdixon/escarole/releases/download/v0.1.0/escarole-linux.tar.gz |\
-    tar xvz -C /usr/local/bin
+ADD https://github.com/albertrdixon/escarole/releases/download/v0.1.1/escarole-linux.tgz /es.tgz
+RUN tar xvzf /es.tgz -C /usr/local \
+    && ln -s /usr/local/bin/t2-linux /usr/local/bin/t2 \
+    && rm -f /es.tgz
 
 RUN git clone -v --depth 1 git://github.com/RuudBurger/CouchPotatoServer.git /couchpotato
 
