@@ -9,12 +9,12 @@ RUN apk add bash python ca-certificates \
 
 ADD https://github.com/albertrdixon/tmplnator/releases/download/v2.2.0/t2-linux.tgz /t2.tgz
 RUN tar xvzf /t2.tgz -C /usr/local \
-    && ln -s /usr/local/bin/escarole-linux /usr/local/bin/escarole \
+    && ln -s /usr/local/bin/t2-linux /usr/local/bin/t2 \
     && rm -f /t2.tgz
 
 ADD https://github.com/albertrdixon/escarole/releases/download/v0.1.1/escarole-linux.tgz /es.tgz
 RUN tar xvzf /es.tgz -C /usr/local \
-    && ln -s /usr/local/bin/t2-linux /usr/local/bin/t2 \
+    && ln -s /usr/local/bin/escarole-linux /usr/local/bin/escarole \
     && rm -f /es.tgz
 
 RUN git clone -v --depth 1 git://github.com/RuudBurger/CouchPotatoServer.git /couchpotato
