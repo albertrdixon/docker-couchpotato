@@ -15,6 +15,9 @@ ENV OPEN_FILE_LIMIT      32768
 ENV PATH                 /usr/local/bin:$PATH
 ENV SUPERVISOR_LOG_LEVEL INFO
 ENV UPDATE_INTERVAL      4h
+ENV LC_ALL               en_US.UTF-8
+ENV LANG                 en_US.UTF-8
+ENV LANGUAGE             en_US.UTF-8
 
 ADD https://github.com/albertrdixon/tmplnator/releases/download/v2.2.0/t2-linux.tgz /t2.tgz
 RUN tar xvzf /t2.tgz -C /usr/local \
