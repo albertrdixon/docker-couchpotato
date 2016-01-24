@@ -21,7 +21,7 @@ ENV LANG=en_US.UTF-8 \
 
 COPY ["entry", "start", "/sbin/"]
 COPY escarole.yml /
-ADD https://github.com/albertrdixon/escarole/releases/download/v0.2.2/escarole-linux.tgz /es.tgz
+ADD https://github.com/albertrdixon/escarole/releases/download/v0.2.3/escarole-linux.tgz /es.tgz
 RUN tar xvzf /es.tgz -C /bin \
     && rm -rf /es.tgz \
     && chmod +rx /sbin/entry /sbin/start \
