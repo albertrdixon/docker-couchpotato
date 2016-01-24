@@ -1,0 +1,1 @@
+cmd: 'python -u ${APP_HOME}/CouchPotato.py --data_dir ${DATA_DIR} --config_file ${CP_CONFIG} --console_log'
