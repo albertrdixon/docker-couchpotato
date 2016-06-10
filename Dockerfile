@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:3.4
 MAINTAINER Albert Dixon <albert@dixon.rocks>
 
 ENTRYPOINT ["tini", "--", "/sbin/entry"]
@@ -30,6 +30,7 @@ RUN tar xvzf /es.tgz -C /bin \
     && apk add --update --purge \
         ca-certificates \
         git \
+        openssl \
         py-html5lib \
         py-lxml \
         py-openssl \
