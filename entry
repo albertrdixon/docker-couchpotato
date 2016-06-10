@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "**** Starting Couchpotato (https://couchpota.to/) container. Enjoy! ****"
+[ -n "$OPEN_FILE_LIMIT" ] &&\
+  ulimit -n $OPEN_FILE_LIMIT
+
+echo "--> Checking couchpotato user ..."
+if ! id couchpotato >/dev/null 2>&1; then
+  echo "--> Creating couchpotato user and group ..."
+  addgroup -g ${CP_GID} couchpotato || true
+  adduser -s /sbin/nologin -D -h /src -G couchpotato -u ${CP_UID} couchpotato
+  adduser couchpotato users
+fi
+
+exec $*
