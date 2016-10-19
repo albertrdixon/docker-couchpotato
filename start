@@ -2,4 +2,4 @@
 chown -Rc couchpotato:couchpotato /data /src /downloads /movies
 exec /bin/escarole --branch=${CP_CHANNEL} \
   --update-interval=${UPDATE_INTERVAL} \
-  --uid=${CP_UID} --gid=${CP_GID} RuudBurger/CouchPotatoServer couchpotato
+  --uid=${CP_UID} --gid=${CP_GID} CouchPotato/CouchPotatoServer couchpotato
