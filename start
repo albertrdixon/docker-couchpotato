@@ -1,4 +1,11 @@
 #!/bin/sh
+echo "--> Checking couchpotato user ..."
+if ! id couchpotato >/dev/null 2>&1; then
+  echo "--> Creating couchpotato user and group ..."
+  addgroup -g ${CP_GID} couchpotato || true
+  adduser -s /sbin/nologin -D -h /src -G couchpotato -u ${CP_UID} couchpotato
+  adduser couchpotato users
+fi
 chown -Rc couchpotato:couchpotato /data /src /downloads /movies
 exec /bin/escarole --branch=${CP_CHANNEL} \
   --update-interval=${UPDATE_INTERVAL} \
